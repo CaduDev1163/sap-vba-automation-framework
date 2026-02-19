@@ -1,0 +1,202 @@
+📌 Projeto: Automação SAP GUI com VBA para Integração com Excel
+
+ 1. Problema Inicial
+
+Em muitas empresas que utilizam SAP, a extração de relatórios segue um fluxo manual:
+
+1. O usuário acessa o SAP.
+2. Navega até uma transação específica.
+3. Preenche filtros (ex: datas).
+4. Executa o relatório.
+5. Exporta para Excel.
+6. Abre o arquivo.
+7. Copia os dados.
+8. Cola em uma planilha base.
+
+Esse processo:
+
+-> Consome tempo
+-> Está sujeito a erro humano
+-> Depende da atenção do operador
+-> Não é padronizado
+
+---
+
+ 2. Objetivo do Projeto
+
+Automatizar completamente o fluxo de extração de dados do SAP e integração com o Excel, reduzindo intervenção manual e garantindo padronização.
+
+---
+
+ 3. Arquitetura da Solução
+
+A solução foi dividida em módulos para manter organização e escalabilidade:
+
+🔹 VBA (Excel)
+
+Responsável por:
+
+-> Conectar ao SAP
+-> Controlar o fluxo de execução
+-> Definir datas dinamicamente
+-> Importar os dados exportados
+-> Atualizar a planilha final
+
+🔹 VBS (SAP Script)
+
+Responsável por:
+
+-> Navegar nas telas do SAP
+-> Executar transações
+-> Selecionar campos
+-> Exportar relatório
+
+Essa separação permite:
+
+-> Melhor manutenção
+-> Reutilização de código
+-> Maior controle do processo
+
+---
+
+ 4. Fluxo da Automação
+
+Etapa 1 – Conexão com SAP
+
+O VBA:
+
+-> Verifica se o SAP está aberto
+-> Conecta à sessão ativa
+-> Garante que não está na tela de logon
+
+---
+
+Etapa 2 – Retorno Seguro ao Menu Inicial
+
+Independentemente da tela atual:
+
+-> O sistema envia o comando `/n`
+-> Garante retorno ao SAP Easy Access
+-> Fecha pop-ups que possam impedir o fluxo
+
+Isso evita erro de navegação.
+
+---
+
+Etapa 3 – Navegação até a Transação
+
+O script:
+
+-> Digita o código da transação
+-> Pressiona Enter
+-> Aguarda carregamento
+
+---
+
+ Etapa 4 – Preenchimento Dinâmico de Datas
+
+As datas podem ser:
+
+-> Definidas pelo usuário
+  ou
+-> Calculadas automaticamente (ex: mês anterior até hoje)
+
+O VBA:
+
+-> Lê as células da planilha
+-> Formata no padrão do SAP
+-> Insere diretamente nos campos corretos
+
+---
+
+ Etapa 5 – Execução do Relatório
+
+O script:
+
+-> Executa a transação
+-> Seleciona todos os campos necessários
+-> Gera o relatório
+
+---
+
+ Etapa 6 – Exportação para Excel
+
+O SAP:
+
+-> Exporta o relatório em formato `.xlsx`
+-> O Excel abre automaticamente o arquivo
+
+---
+
+ Etapa 7 – Importação Automática
+
+O VBA:
+
+-> Identifica o arquivo aberto (EXPORT_->.xlsx)
+-> Copia todos os dados
+-> Cola na planilha principal
+-> Mantém os dados antigos
+-> Ajusta largura das colunas automaticamente
+
+---
+
+ Etapa 8 – Controle e Limpeza
+
+Foi criado um botão adicional para:
+
+-> Limpar apenas os dados inseridos
+-> Detectar automaticamente a dimensão da tabela
+-> Preservar estrutura e botões
+
+---
+
+ 5. Técnicas Utilizadas
+
+-> SAP GUI Scripting
+-> Manipulação de objetos COM
+-> VBA modularização
+-> Identificação dinâmica de arquivos abertos
+-> Tratamento de erros (`On Error Resume Next`)
+-> Controle de fluxo com verificação de estado do SAP
+-> Estruturação baseada em responsabilidades
+
+---
+
+ 6. Benefícios Obtidos
+
+-> Redução significativa do tempo de operação
+-> Eliminação de erros de digitação
+-> Padronização do processo
+-> Repetibilidade confiável
+-> Estrutura reutilizável para outras transações
+
+---
+
+ 7. Aplicabilidade
+
+A lógica pode ser aplicada em:
+
+-> Logística
+-> Controladoria
+-> Financeiro
+-> Produção
+-> Compras
+-> RH
+
+Qualquer setor que utilize SAP e gere relatórios manuais.
+
+---
+
+ 8. Diferencial Técnico do Projeto
+
+O projeto não é apenas um script simples.
+
+Ele inclui:
+
+-> Tratamento de exceções
+-> Controle de estado da aplicação
+-> Modularização
+-> Separação de responsabilidades
+-> Estrutura reutilizável
+
+Isso caracteriza uma solução de automação estruturada e escalável.
